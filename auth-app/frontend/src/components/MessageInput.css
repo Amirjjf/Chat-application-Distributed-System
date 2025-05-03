@@ -2,51 +2,48 @@
 .message-input-form {
     display: flex;
     padding: 10px 15px;
-    background-color: #f1f1f1; /* Slightly different background */
+    background-color: #f1f1f1;
     border-top: 1px solid #dcdcdc;
-    flex-shrink: 0; /* Prevent input area from shrinking */
+    flex-shrink: 0;
   }
-  
+
   .message-input-form input[type="text"] {
-    flex-grow: 1; /* Input takes available space */
+    flex-grow: 1;
     padding: 10px 15px;
     border: 1px solid #ccc;
-    border-radius: 20px; /* Rounded input */
+    border-radius: 20px;
     margin-right: 10px;
     font-size: 0.95em;
-    outline: none; /* Remove default outline */
+    outline: none;
     transition: border-color 0.2s ease;
   }
-  
+
   .message-input-form input[type="text"]:focus {
-    border-color: #007bff; /* Highlight focus */
+    border-color: #007bff;
   }
-  
+
   .message-input-form input[type="text"]:disabled {
-      background-color: #e9ecef; /* Indicate disabled state */
+      background-color: #e9ecef;
       cursor: not-allowed;
   }
-  
-  
+
   .message-input-form button {
-    /* Inherits some styles from App.css button */
-    width: auto; /* Override full width */
+    width: auto;
     padding: 10px 20px;
     font-size: 0.95em;
-    border-radius: 20px; /* Match input rounding */
-    margin-top: 0; /* Remove top margin from App.css */
-    flex-shrink: 0; /* Prevent button from shrinking */
+    border-radius: 20px;
+    margin-top: 0;
+    flex-shrink: 0;
   }
-  
+
   .message-input-form button:disabled {
-    background-color: #a0cffa; /* Lighter blue when disabled but connected */
+    background-color: #a0cffa;
     cursor: not-allowed;
   }
-  
-  /* Style specifically when disabled due to connection issue */
+
   .message-input-form input:disabled,
   .message-input-form button:disabled {
-      background-color: #f8d7da; /* Light red background */
-      color: #721c24; /* Dark red text */
-      border-color: #f5c6cb; /* Light red border */
+      background-color: #f8d7da;
+      color: #721c24;
+      border-color: #f5c6cb;
   }

@@ -1,29 +1,27 @@
-// frontend/src/pages/ChatPage.jsx
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import authApi from '../services/authApi';
 import ChatWindow from '../components/ChatWindow';
 import MessageInput from '../components/MessageInput';
 import { useNavigate } from 'react-router-dom';
-import './ChatPage.css'; // We'll create this CSS file
+import './ChatPage.css';
 
-// Use environment variable in a real app
-const CHAT_APP_WS_URL = 'ws://localhost:5002'; // Chat App WebSocket URL
+const CHAT_APP_WS_URL = 'ws://localhost:5002';
 
 function ChatPage() {
   const [messages, setMessages] = useState([]);
   const [isConnected, setIsConnected] = useState(false);
   const [error, setError] = useState('');
-  const ws = useRef(null); // persist WebSocket instance
+  const ws = useRef(null);
   const isUnmounting = useRef(false);
   const navigate = useNavigate();
-  const currentUser = authApi.getCurrentUser(); // Get logged-in user info
+  const currentUser = authApi.getCurrentUser();
 
   const connectWebSocket = useCallback(() => {
     const token = authApi.getToken();
     if (!token) {
       setError('Authentication token not found. Redirecting to login.');
       authApi.logout();
-      setIsConnected(false); // Ensure connection state is updated
+      setIsConnected(false);
       navigate('/login');
       return;
     }
@@ -101,7 +99,6 @@ function ChatPage() {
     };
   }, [navigate]);
 
-  // Only run on mount and unmount
   useEffect(() => {
     const user = authApi.getCurrentUser();
     if (!user) {

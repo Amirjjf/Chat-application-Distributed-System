@@ -1,27 +1,26 @@
 /* frontend/src/components/ChatWindow.css */
 .chat-window {
-    flex-grow: 1; /* Allow chat window to take up available space */
-    overflow-y: auto; /* Enable vertical scrolling for messages */
+    flex-grow: 1;
+    overflow-y: auto;
     padding: 15px;
-    background-color: #ffffff; /* Or a subtle background like #f9f9f9 */
+    background-color: #ffffff;
     display: flex;
-    flex-direction: column; /* Stack message list */
+    flex-direction: column;
   }
-  
+
   .message-list {
     list-style: none;
     padding: 0;
     margin: 0;
-    /* flex-grow: 1 allows list to expand, used with overflow-y on parent */
   }
-  
+
   .message-item {
     display: flex;
     margin-bottom: 15px;
-    max-width: 75%; /* Limit message width */
-    align-items: flex-end; /* Align items to the bottom */
+    max-width: 75%;
+    align-items: flex-end;
   }
-  
+
   .message-avatar {
     width: 35px;
     height: 35px;
@@ -29,69 +28,64 @@
     object-fit: cover;
     margin-right: 10px;
     border: 1px solid #eee;
-    align-self: flex-start; /* Keep avatar at the top */
+    align-self: flex-start;
   }
-  
+
   .message-content {
-    background-color: #e9e9eb; /* Default background for others */
+    background-color: #e9e9eb;
     padding: 10px 15px;
-    border-radius: 18px; /* Bubble shape */
+    border-radius: 18px;
     display: flex;
     flex-direction: column;
   }
-  
+
   .message-sender {
     font-weight: 600;
     font-size: 0.85em;
     color: #555;
     margin-bottom: 4px;
   }
-  
+
   .message-text {
     margin: 0;
     font-size: 0.95em;
     line-height: 1.4;
-    word-wrap: break-word; /* Break long words */
+    word-wrap: break-word;
     color: #333;
   }
-  
+
   .message-timestamp {
     font-size: 0.75em;
     color: #888;
     margin-top: 5px;
-    align-self: flex-end; /* Timestamp at the bottom right */
+    align-self: flex-end;
   }
-  
-  /* Styling for messages sent by the current user */
+
   .my-message {
-    margin-left: auto; /* Push to the right */
-    flex-direction: row-reverse; /* Reverse order for avatar (if shown) */
+    margin-left: auto;
+    flex-direction: row-reverse;
   }
-  
+
   .my-message .message-content {
-    background-color: #007bff; /* Blue background for own messages */
-    color: white; /* White text */
+    background-color: #007bff;
+    color: white;
   }
-  
+
   .my-message .message-avatar {
     margin-left: 10px;
     margin-right: 0;
-    /* Typically hide own avatar unless desired */
-     display: none;
+    display: none;
   }
-  
-  /* Adjust timestamp color for own messages */
+
   .my-message .message-timestamp {
     color: #e0e0e0;
     align-self: flex-end;
   }
-  
-  /* Hide sender name for own messages */
+
   .my-message .message-sender {
     display: none;
   }
-  
-  /* Loading state */
+
   .chat-window.loading {
       display: flex;
       justify-content: center;
