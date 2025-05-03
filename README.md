@@ -8,7 +8,8 @@ A basic microservices-based chat application with user authentication and real-t
 * JWT-Based Authentication
 * Real-time WebSocket Chat
 * Microservice Architecture (Auth + Chat Services)
-* Remote Procedure Calls (RPC) for Inter-Service Communication
+* Threaded Message Processing using Worker Threads
+* gRPC-Based Authentication Service for Secure Inter-Service Communication
 * REST APIs for Resource Management
 * Scalable via Microservices Pattern
 
