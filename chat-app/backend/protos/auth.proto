@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package auth;
+
+service AuthService {
+  rpc VerifyToken (VerifyTokenRequest) returns (VerifyTokenResponse) {}
+}
+
+message VerifyTokenRequest {
+  string token = 1;
+}
+
+message UserInfo {
+  string id = 1;
+  string user_login_id = 2;
+  string name = 3;
+  string profile_pic_filename = 4;
+}
+
+message VerifyTokenResponse {
+  optional UserInfo user_info = 1;
+  optional string error = 2;
+}
