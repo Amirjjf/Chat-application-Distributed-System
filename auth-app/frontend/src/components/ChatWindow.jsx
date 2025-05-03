@@ -1,13 +1,22 @@
-// frontend/src/components/ChatWindow.jsx
 import React, { useEffect, useRef } from 'react';
 import './ChatWindow.css';
 
 const IMAGE_BASE_URL = 'http://localhost:5001/uploads/profile_pics';
 const DEFAULT_AVATAR = '/default-avatar.png';
 
+const logComparison = (msg, currentUser, componentId) => {
+    console.log(
+        `[${componentId}] Comparing msg ID ${msg?._id}:`,
+        `\n  msg.senderId: ${msg?.senderId} (Type: ${typeof msg?.senderId})`,
+        `\n  currentUser._id: ${currentUser?._id} (Type: ${typeof currentUser?._id})`,
+        `\n  Comparison Result (===): ${msg?.senderId === currentUser?._id}`
+    );
+};
+
 function ChatWindow({ messages = [], currentUser }) {
     const messagesEndRef = useRef(null);
     const prevMessagesLength = useRef(messages.length);
+    const instanceId = useRef(`ChatWindow-${Math.random().toString(36).substring(2, 7)}`).current;
 
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
@@ -20,7 +29,12 @@ function ChatWindow({ messages = [], currentUser }) {
         prevMessagesLength.current = messages.length;
     }, [messages]);
 
+    useEffect(() => {
+        console.log(`[${instanceId}] currentUser prop updated:`, currentUser?._id);
+    }, [currentUser, instanceId]);
+
     if (!currentUser) {
+        console.log(`[${instanceId}] Rendering loading state (currentUser is null/undefined)`);
         return <div className="chat-window loading">Loading messages...</div>;
     }
 
@@ -33,16 +47,20 @@ function ChatWindow({ messages = [], currentUser }) {
 
     const handleImageError = (e) => {
         if (e.target.src !== DEFAULT_AVATAR) {
-            console.warn(`Failed to load avatar: ${e.target.src}. Falling back to default.`);
+            console.warn(`[${instanceId}] Failed to load avatar: ${e.target.src}. Falling back to default.`);
             e.target.onerror = null;
             e.target.src = DEFAULT_AVATAR;
         }
     };
 
+    console.log(`[${instanceId}] Rendering ChatWindow with ${messages.length} messages. Current User ID: ${currentUser._id}`);
+
     return (
         <div className="chat-window">
             <ul className="message-list">
-                {messages.map((msg) => {
+                {messages.map((msg, index) => {
+                    logComparison(msg, currentUser, instanceId);
+
                     const isCurrentUser = msg.senderId === currentUser._id;
                     const timestamp = msg.timestamp
                         ? new Date(msg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
@@ -50,7 +68,7 @@ function ChatWindow({ messages = [], currentUser }) {
 
                     return (
                         <li
-                            key={msg._id || `msg-${Math.random()}`}
+                            key={msg._id || `msg-temp-${index}-${Date.now()}`}
                             className={`message-item ${isCurrentUser ? 'my-message' : 'other-message'}`}
                         >
                             {!isCurrentUser && (
