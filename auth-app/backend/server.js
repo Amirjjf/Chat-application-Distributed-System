@@ -1,26 +1,24 @@
-// auth-app/backend/server.js
 import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import jwt from 'jsonwebtoken'; // Keep jwt for verification here
-import grpc from '@grpc/grpc-js'; // Import gRPC
-import protoLoader from '@grpc/proto-loader'; // Import protoLoader
+import jwt from 'jsonwebtoken';
+import grpc from '@grpc/grpc-js';
+import protoLoader from '@grpc/proto-loader';
 
 import userRoutes from './routes/users.js';
-import User from './models/User.js'; // Import User model if needed for future RPCs
+import User from './models/User.js';
 
 dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// --- Express App Setup ---
 const app = express();
 const port = process.env.PORT || 5001;
-const grpcPort = process.env.GRPC_PORT || 50051; // Get gRPC port from env
+const grpcPort = process.env.GRPC_PORT || 50051;
 
 app.use(cors());
 app.use(express.json());
@@ -29,7 +27,6 @@ app.use(express.urlencoded({ extended: true }));
 const uploadsPath = path.join(__dirname, 'uploads');
 app.use('/uploads', express.static(uploadsPath));
 
-// --- MongoDB Connection ---
 mongoose.connect(process.env.MONGO_URI)
     .then(() => console.log('AuthApp MongoDB Connected'))
     .catch(err => {
@@ -37,16 +34,13 @@ mongoose.connect(process.env.MONGO_URI)
         process.exit(1);
     });
 
-// --- Express Routes ---
 app.use('/api/users', userRoutes);
 app.get('/', (_req, res) => res.send('AuthApp Backend (HTTP) Running'));
 
-// --- Start Express Server ---
 app.listen(port, () => {
     console.log(`AuthApp HTTP Server listening at http://localhost:${port}`);
 });
 
-// --- gRPC Server Setup ---
 const PROTO_PATH = path.join(__dirname, 'protos/auth.proto');
 const packageDefinition = protoLoader.loadSync(PROTO_PATH, {
     keepCase: true,
@@ -57,7 +51,6 @@ const packageDefinition = protoLoader.loadSync(PROTO_PATH, {
 });
 const authProto = grpc.loadPackageDefinition(packageDefinition).auth;
 
-// gRPC Service Implementation
 const verifyToken = (call, callback) => {
     const token = call.request.token;
     console.log(`[gRPC] Received VerifyToken request`);
@@ -69,10 +62,9 @@ const verifyToken = (call, callback) => {
 
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        // Decoded payload should contain: id, user_id, name, profile_pic_filename
         console.log(`[gRPC] Token verified successfully for user: ${decoded.name} (ID: ${decoded.id})`);
         const userInfo = {
-            id: decoded.id, // MongoDB _id as string
+            id: decoded.id,
             user_login_id: decoded.user_id,
             name: decoded.name,
             profile_pic_filename: decoded.profile_pic_filename || null
@@ -84,7 +76,6 @@ const verifyToken = (call, callback) => {
     }
 };
 
-// Create and Start gRPC Server
 const grpcServer = new grpc.Server();
 grpcServer.addService(authProto.AuthService.service, { verifyToken: verifyToken });
 

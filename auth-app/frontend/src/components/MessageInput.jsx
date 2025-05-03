@@ -1,4 +1,3 @@
-// frontend/src/components/MessageInput.jsx
 import React, { useState } from 'react';
 import './MessageInput.css';
 

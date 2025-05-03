@@ -1,6 +1,4 @@
-/* index.css */
 :root {
-  /* Color Palette */
   --primary-color: #646cff;
   --primary-hover-color: #535bf2;
   --background-color-light: #ffffff;
@@ -18,13 +16,10 @@
   --success-border-color: #81c784;
   --success-background-color: rgba(76, 175, 80, 0.1);
 
-  /* Fonts */
   --font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
 
-  /* Transitions */
   --transition-speed: 0.25s;
 
-  /* Default to light theme variables */
   --background-color: var(--background-color-light);
   --text-color: var(--text-color-light);
   --input-background: var(--input-background-light);
@@ -34,7 +29,7 @@
   --button-text-color: var(--primary-color);
   --button-hover-background: var(--primary-color);
   --button-hover-text-color: var(--background-color-light);
-  --nav-background: #34495e; /* Darker shade for improved contrast */
+  --nav-background: #34495e;
   --link-color: var(--primary-color);
   --link-hover-color: var(--primary-hover-color);
   --card-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -53,7 +48,7 @@
     --button-hover-background: var(--primary-hover-color);
     --button-hover-text-color: var(--background-color-dark);
     --nav-background: #1e1e1e;
-    --link-color: var(--primary-hover-color); /* Lighter blue for dark mode links */
+    --link-color: var(--primary-hover-color);
     --link-hover-color: #747bff;
     --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     --input-border-focus: var(--primary-hover-color);
@@ -86,39 +81,39 @@ body {
 
 #root {
   width: 100%;
-  max-width: 1280px; /* Or adjust as needed */
+  max-width: 1280px;
   margin: 0 auto;
-  padding: 1rem 2rem; /* Reduced padding slightly */
+  padding: 1rem 2rem;
   text-align: center;
 }
 
 a {
   font-weight: 500;
   color: var(--link-color);
-  text-decoration: none; /* Remove underline by default */
+  text-decoration: none;
   transition: color var(--transition-speed);
 }
 a:hover {
   color: var(--link-hover-color);
-  text-decoration: underline; /* Add underline on hover */
+  text-decoration: underline;
 }
 
 h1 {
-  font-size: 2.8em; /* Slightly smaller */
+  font-size: 2.8em;
   line-height: 1.1;
-  color: var(--text-color); /* Ensure heading color follows theme */
+  color: var(--text-color);
 }
 
 h2 {
-  margin-bottom: 1.5rem; /* Space below headings */
+  margin-bottom: 1.5rem;
   font-weight: 600;
-   color: var(--text-color);
+  color: var(--text-color);
 }
 
 button {
   border-radius: 8px;
   border: 1px solid var(--button-border-color);
-  padding: 0.7em 1.4em; /* Slightly larger padding */
+  padding: 0.7em 1.4em;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
@@ -126,7 +121,7 @@ button {
   background-color: var(--button-background);
   cursor: pointer;
   transition: border-color var(--transition-speed), background-color var(--transition-speed), color var(--transition-speed);
-  outline: none; /* Remove default outline */
+  outline: none;
 }
 
 button:hover:not(:disabled) {
@@ -136,8 +131,7 @@ button:hover:not(:disabled) {
 }
 
 button:focus-visible {
-  /* Custom focus ring for accessibility */
-  box-shadow: 0 0 0 3px rgba(var(--primary-rgb, 100, 108, 255), 0.4); /* Use RGB if available or fallback */
+  box-shadow: 0 0 0 3px rgba(var(--primary-rgb, 100, 108, 255), 0.4);
   border-color: var(--primary-hover-color);
 }
 

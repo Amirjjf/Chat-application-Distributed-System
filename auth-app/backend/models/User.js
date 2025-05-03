@@ -5,7 +5,7 @@ const schema = new mongoose.Schema({
   user_id: {
     type: String,
     required: true,
-    unique: true, // includes index
+    unique: true,
     trim: true
   },
   password_hash: {
@@ -20,7 +20,7 @@ const schema = new mongoose.Schema({
   email: {
     type: String,
     required: true,
-    unique: true, // includes index
+    unique: true, 
     trim: true,
     lowercase: true,
     match: [/\S+@\S+\.\S+/, 'Invalid email']
