@@ -82,4 +82,4 @@ Node.js, Express, React, MongoDB, Mongoose, WebSockets (`ws`), JWT, Bcrypt, Mult
 
 ---
 
-Access the application at `http://localhost:3000`. Sign up, log in, and navigate to the chat page to start real-time messaging between users.
+Access the application at `http://localhost:5173`. Sign up, log in, and navigate to the chat page to start real-time messaging between users.
