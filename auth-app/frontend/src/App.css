@@ -1,0 +1,370 @@
+/* App.css */
+
+
+
+/* --- General Body Styles --- */
+body {
+  margin: 0;
+  font-family: var(--font-family, sans-serif); /* Use variable or fallback */
+  background-color: #f4f7f6; /* Example fallback */
+  color: var(--text-color, #333);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Main App Container */
+/* Removed empty ruleset for #root */
+
+
+/* --- Navigation --- */
+.app-nav {
+  padding: 10px 25px; /* Adjusted padding */
+  background-color: var(--nav-background, #34495e); /* Changed to a darker shade for better contrast */
+  /* margin-bottom: 30px; */ /* Removed, handle spacing via .app-content */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between; /* Align link groups and user section */
+  align-items: center; /* Vertically center items */
+  /* gap: 20px; */ /* Gap is less useful with space-between */
+}
+
+.nav-links {
+  display: flex;
+  gap: 15px; /* Space between links in the left group */
+}
+
+.nav-links a {
+  color: var(--background-color-light, #ecf0f1); /* Light text for dark nav */
+  font-weight: 500;
+  padding: 8px 12px;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background-color var(--transition-speed, 0.2s);
+}
+
+.nav-links a:hover,
+.nav-links a.active { /* Add 'active' class via NavLink if needed */
+  background-color: rgba(255, 255, 255, 0.1); /* Subtle hover on dark bg */
+  text-decoration: none;
+}
+
+/* User Section in Nav */
+.nav-user-section {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Space between user name and logout button */
+  color: var(--background-color-light, #ecf0f1); /* Light text */
+}
+
+.nav-user-name {
+  font-weight: 500;
+  font-size: 0.95em;
+}
+
+.nav-logout-btn {
+  background-color: var(--error-color, #e74c3c); /* Red for logout */
+  color: var(--background-color-light, white);
+  border: none;
+  padding: 7px 14px; /* Slightly smaller padding */
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9em;
+  font-weight: 500;
+  transition: background-color var(--transition-speed, 0.2s);
+}
+
+.nav-logout-btn:hover {
+  background-color: #c0392b; /* Darker red fallback */
+  /* Consider using a variable for hover state if defined */
+}
+
+
+/* --- Main Content Area --- */
+.app-content {
+  padding: 25px; /* Padding around content */
+  max-width: 1200px;
+  margin: 0 auto; /* Center content area */
+}
+
+
+/* --- General Page Container (Used by Login/Signup/potentially others) --- */
+.page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* justify-content: center; */ /* Removed, usually not needed */
+  padding: 20px; /* Basic padding, forms might have more */
+  background-color: var(--background-color, #fff); /* Default page background */
+  border-radius: 8px;
+  box-shadow: var(--card-shadow, 0 1px 3px rgba(0,0,0,0.1));
+  max-width: 550px; /* Max width for simple pages like login/signup */
+  margin: 30px auto; /* Center these page containers */
+}
+
+
+/* --- Form Styling --- */
+.form-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 400px; /* Control form width */
+  margin: 0; /* Remove margin auto if inside .page-container */
+  padding: 25px 30px; /* Padding inside form */
+  gap: 18px; /* Space between elements */
+  background-color: transparent; /* Inherit from page-container or set if needed */
+  border-radius: 12px; /* Keep rounding if desired */
+  box-shadow: none; /* Remove shadow if inside page-container */
+  border: none; /* Remove border if inside page-container */
+  /* border: 1px solid var(--border-color); */
+}
+
+.form-container h2 { /* Style headings within forms */
+    text-align: center;
+    color: var(--text-color, #333);
+    margin-bottom: 15px; /* Space below heading */
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  text-align: left; /* Align labels left */
+  width: 100%;
+}
+
+.input-group label {
+  margin-bottom: 6px;
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: var(--text-color, #555);
+  opacity: 0.9;
+}
+
+.input-group input[type="text"],
+.input-group input[type="password"],
+.input-group input[type="email"],
+.input-group input[type="file"] {
+  padding: 12px 15px;
+  border: 1px solid var(--border-color, #ccc);
+  background-color: var(--input-background, #fff);
+  color: var(--text-color, #333);
+  border-radius: 6px;
+  font-size: 1rem;
+  width: 100%;
+  box-sizing: border-box; /* Include padding in width */
+  transition: border-color var(--transition-speed, 0.2s), box-shadow var(--transition-speed, 0.2s);
+}
+
+.input-group input[type="file"] {
+  padding: 8px 10px;
+  cursor: pointer;
+}
+
+/* Style the button *inside* the file input */
+.input-group input[type="file"]::file-selector-button {
+  padding: 4px 8px;
+  border-radius: 4px;
+  border: 1px solid var(--primary-color, #007bff);
+  background-color: var(--input-background, #fff);
+  color: var(--primary-color, #007bff);
+  cursor: pointer;
+  transition: background-color var(--transition-speed, 0.2s), color var(--transition-speed, 0.2s);
+  margin-right: 10px;
+}
+
+.input-group input[type="file"]:hover::file-selector-button {
+  background-color: var(--primary-color, #007bff);
+  color: var(--background-color-light, #fff);
+}
+
+
+.input-group input:focus,
+.input-group input:focus-visible {
+  outline: none;
+  border-color: var(--input-border-focus, #007bff);
+  box-shadow: 0 0 0 3px rgba(var(--primary-rgb, 0, 123, 255), 0.2); /* Focus glow */
+}
+
+/* General Button Styling (can be used by form buttons) */
+button {
+  background-color: var(--primary-color, #007bff);
+  color: var(--background-color-light, white);
+  padding: 12px 20px;
+  border: none;
+  border-radius: 6px; /* Consistent rounding */
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: 500;
+  transition: background-color var(--transition-speed, 0.2s);
+  width: 100%; /* Default to full width for form buttons */
+  margin-top: 10px; /* Space above buttons in forms */
+  box-sizing: border-box;
+}
+
+button:disabled {
+  background-color: #bdc3c7; /* Grey fallback */
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+button:not(:disabled):hover {
+  background-color: #0056b3; /* Darker blue fallback */
+  /* Consider a variable for hover state */
+}
+
+/* --- Feedback Messages --- */
+.message {
+  padding: 10px 15px;
+  border-radius: 6px;
+  margin-bottom: 15px; /* Space below message */
+  font-size: 0.95rem;
+  border-width: 1px;
+  border-style: solid;
+  text-align: center;
+}
+
+.error-message {
+  color: var(--error-color, #dc3545);
+  border-color: var(--error-border-color, #f5c6cb);
+  background-color: var(--error-background-color, #f8d7da);
+}
+
+.success-message {
+  color: var(--success-color, #28a745);
+  border-color: var(--success-border-color, #c3e6cb);
+  background-color: var(--success-background-color, #d4edda);
+}
+
+
+/* --- Page Links (below forms) --- */
+.page-link-text {
+  text-align: center;
+  margin-top: 25px;
+  font-size: 0.95rem;
+  color: var(--text-color, #555);
+}
+
+.page-link-text a {
+  color: var(--primary-color, #007bff);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.page-link-text a:hover {
+  text-decoration: underline;
+}
+
+/* File name display (optional helper for signup form) */
+.file-name-display {
+    font-size: 0.85em;
+    color: #777;
+    margin-top: 5px; /* Space below file input */
+    display: block; /* Ensure it takes its own line */
+    text-align: left;
+}
+
+
+/* --- Home Page Specific Styles --- */
+.home-container {
+  padding: 24px;
+  font-family: var(--font-family, sans-serif);
+  text-align: center;
+  /* Use page-container styles for background/shadow if desired */
+  /* Or style directly */
+  background-color: var(--background-color, #fff);
+  border-radius: 8px;
+  box-shadow: var(--card-shadow, 0 1px 3px rgba(0,0,0,0.1));
+  max-width: 800px;
+  margin: 30px auto;
+}
+
+.home-container h2 {
+    margin-bottom: 25px; /* Space below welcome heading */
+}
+
+.profile-card {
+  border: 1px solid var(--border-color, #eee);
+  padding: 25px 30px;
+  border-radius: 12px;
+  max-width: 450px; /* Keep profile card constrained */
+  margin: 0 auto 30px auto; /* Center card, add space below */
+  text-align: center;
+  background-color: var(--input-background, #fdfdfd); /* Slightly different bg */
+  box-shadow: none; /* Remove shadow if inside home-container with shadow */
+}
+
+.profile-avatar {
+  width: 110px; /* Adjusted size */
+  height: 110px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 20px;
+  border: 3px solid var(--border-color, #eee);
+}
+
+.profile-card h3 { /* Added style for profile heading */
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: var(--text-color, #333);
+    font-size: 1.3em;
+}
+
+.profile-card p {
+  margin-bottom: 10px;
+  font-size: 1rem;
+  line-height: 1.5;
+  text-align: left;
+}
+
+.profile-card p strong {
+  display: inline-block;
+  min-width: 90px;
+  font-weight: 600;
+  margin-right: 8px;
+  color: var(--text-color, #444);
+}
+
+/* Container for action buttons on Home page */
+.home-actions {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Space between buttons */
+    margin-top: 25px; /* Space above action buttons */
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+}
+
+/* General button style for home actions (applied via className="button") */
+.home-actions .button {
+    display: inline-block;
+    text-decoration: none;
+    text-align: center;
+    width: auto; /* Don't force full width */
+    min-width: 130px; /* Minimum width */
+    padding: 10px 20px; /* Standard button padding */
+    margin: 5px 0; /* Allow margin for wrapped items */
+    box-sizing: border-box; /* Consistent sizing */
+}
+
+/* Specific button styles */
+.chat-link.button { /* Style chat link like a button */
+    background-color: var(--success-color, #2ecc71); /* Green */
+}
+.chat-link.button:hover {
+    background-color: #27ae60; /* Darker green fallback */
+}
+
+.logout-button.button { /* Style logout button */
+    background-color: var(--error-color, #e74c3c); /* Red */
+}
+.logout-button.button:hover {
+    background-color: #c0392b; /* Darker red fallback */
+}
+
+/* --- Global --- */
+a {
+    color: var(--primary-color, #007bff); /* Default link color */
+    text-decoration: none; /* No underlines by default */
+}
+
+a:hover {
+    text-decoration: underline; /* Underline on hover */
+}

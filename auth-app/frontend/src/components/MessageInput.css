@@ -1,0 +1,52 @@
+/* frontend/src/components/MessageInput.css */
+.message-input-form {
+    display: flex;
+    padding: 10px 15px;
+    background-color: #f1f1f1; /* Slightly different background */
+    border-top: 1px solid #dcdcdc;
+    flex-shrink: 0; /* Prevent input area from shrinking */
+  }
+  
+  .message-input-form input[type="text"] {
+    flex-grow: 1; /* Input takes available space */
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    border-radius: 20px; /* Rounded input */
+    margin-right: 10px;
+    font-size: 0.95em;
+    outline: none; /* Remove default outline */
+    transition: border-color 0.2s ease;
+  }
+  
+  .message-input-form input[type="text"]:focus {
+    border-color: #007bff; /* Highlight focus */
+  }
+  
+  .message-input-form input[type="text"]:disabled {
+      background-color: #e9ecef; /* Indicate disabled state */
+      cursor: not-allowed;
+  }
+  
+  
+  .message-input-form button {
+    /* Inherits some styles from App.css button */
+    width: auto; /* Override full width */
+    padding: 10px 20px;
+    font-size: 0.95em;
+    border-radius: 20px; /* Match input rounding */
+    margin-top: 0; /* Remove top margin from App.css */
+    flex-shrink: 0; /* Prevent button from shrinking */
+  }
+  
+  .message-input-form button:disabled {
+    background-color: #a0cffa; /* Lighter blue when disabled but connected */
+    cursor: not-allowed;
+  }
+  
+  /* Style specifically when disabled due to connection issue */
+  .message-input-form input:disabled,
+  .message-input-form button:disabled {
+      background-color: #f8d7da; /* Light red background */
+      color: #721c24; /* Dark red text */
+      border-color: #f5c6cb; /* Light red border */
+  }

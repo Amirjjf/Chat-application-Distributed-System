@@ -1,0 +1,160 @@
+/* index.css */
+:root {
+  /* Color Palette */
+  --primary-color: #646cff;
+  --primary-hover-color: #535bf2;
+  --background-color-light: #ffffff;
+  --text-color-light: #213547;
+  --background-color-dark: #242424;
+  --text-color-dark: rgba(255, 255, 255, 0.87);
+  --input-background-light: #f9f9f9;
+  --input-background-dark: #1a1a1a;
+  --border-color-light: #ccc;
+  --border-color-dark: #444;
+  --error-color: #ff4d4d;
+  --error-border-color: #ff8080;
+  --error-background-color: rgba(255, 77, 77, 0.1);
+  --success-color: #4caf50;
+  --success-border-color: #81c784;
+  --success-background-color: rgba(76, 175, 80, 0.1);
+
+  /* Fonts */
+  --font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+
+  /* Transitions */
+  --transition-speed: 0.25s;
+
+  /* Default to light theme variables */
+  --background-color: var(--background-color-light);
+  --text-color: var(--text-color-light);
+  --input-background: var(--input-background-light);
+  --border-color: var(--border-color-light);
+  --button-background: var(--input-background-light);
+  --button-border-color: var(--primary-color);
+  --button-text-color: var(--primary-color);
+  --button-hover-background: var(--primary-color);
+  --button-hover-text-color: var(--background-color-light);
+  --nav-background: #34495e; /* Darker shade for improved contrast */
+  --link-color: var(--primary-color);
+  --link-hover-color: var(--primary-hover-color);
+  --card-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  --input-border-focus: var(--primary-color);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background-color: var(--background-color-dark);
+    --text-color: var(--text-color-dark);
+    --input-background: var(--input-background-dark);
+    --border-color: var(--border-color-dark);
+    --button-background: var(--input-background-dark);
+    --button-border-color: var(--primary-hover-color);
+    --button-text-color: var(--primary-hover-color);
+    --button-hover-background: var(--primary-hover-color);
+    --button-hover-text-color: var(--background-color-dark);
+    --nav-background: #1e1e1e;
+    --link-color: var(--primary-hover-color); /* Lighter blue for dark mode links */
+    --link-hover-color: #747bff;
+    --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    --input-border-focus: var(--primary-hover-color);
+  }
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+  font-family: var(--font-family);
+  line-height: 1.6;
+  font-weight: 400;
+  color: var(--text-color);
+  background-color: var(--background-color);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  width: 100%;
+  max-width: 1280px; /* Or adjust as needed */
+  margin: 0 auto;
+  padding: 1rem 2rem; /* Reduced padding slightly */
+  text-align: center;
+}
+
+a {
+  font-weight: 500;
+  color: var(--link-color);
+  text-decoration: none; /* Remove underline by default */
+  transition: color var(--transition-speed);
+}
+a:hover {
+  color: var(--link-hover-color);
+  text-decoration: underline; /* Add underline on hover */
+}
+
+h1 {
+  font-size: 2.8em; /* Slightly smaller */
+  line-height: 1.1;
+  color: var(--text-color); /* Ensure heading color follows theme */
+}
+
+h2 {
+  margin-bottom: 1.5rem; /* Space below headings */
+  font-weight: 600;
+   color: var(--text-color);
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid var(--button-border-color);
+  padding: 0.7em 1.4em; /* Slightly larger padding */
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  color: var(--button-text-color);
+  background-color: var(--button-background);
+  cursor: pointer;
+  transition: border-color var(--transition-speed), background-color var(--transition-speed), color var(--transition-speed);
+  outline: none; /* Remove default outline */
+}
+
+button:hover:not(:disabled) {
+  border-color: var(--primary-hover-color);
+  background-color: var(--button-hover-background);
+  color: var(--button-hover-text-color);
+}
+
+button:focus-visible {
+  /* Custom focus ring for accessibility */
+  box-shadow: 0 0 0 3px rgba(var(--primary-rgb, 100, 108, 255), 0.4); /* Use RGB if available or fallback */
+  border-color: var(--primary-hover-color);
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  border-color: var(--border-color);
+  background-color: var(--input-background);
+  color: var(--text-color);
+}
+
+@keyframes logo-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
