@@ -10,7 +10,6 @@ A basic microservices-based chat application with user authentication and real-t
 * Microservice Architecture (Auth + Chat Services)
 * Remote Procedure Calls (RPC) for Inter-Service Communication
 * REST APIs for Resource Management
-* Threading for Concurrent Operations (e.g., message processing, service handling)
 * Scalable via Microservices Pattern
 
 ## Tech Stack
