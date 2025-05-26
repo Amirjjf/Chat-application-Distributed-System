@@ -181,4 +181,87 @@ router.post('/login', async (req, res) => {
     }
 });
 
+// Middleware to verify JWT token
+const verifyToken = (req, res, next) => {
+    const bearerHeader = req.headers.authorization;
+    
+    if (!bearerHeader) {
+        return res.status(401).json({ message: 'Access denied. No token provided.' });
+    }
+    
+    // Extract token from "Bearer <token>"
+    const token = bearerHeader.split(' ')[1];
+    
+    if (!token) {
+        return res.status(401).json({ message: 'Access denied. Invalid token format.' });
+    }
+    
+    try {
+        // Verify token
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        req.user = decoded;
+        next();
+    } catch (err) {
+        console.error('Token verification error:', err.message);
+        
+        if (err.name === 'TokenExpiredError') {
+            return res.status(401).json({ message: 'Token expired' });
+        }
+        
+        return res.status(400).json({ message: 'Invalid token' });
+    }
+};
+
+// Token refresh endpoint
+router.post('/refresh-token', verifyToken, async (req, res) => {
+    try {
+        // Get user information from the token payload
+        const userId = req.user.id;
+        
+        // Fetch latest user data
+        const user = await User.findById(userId);
+        
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+        
+        // Create a new token
+        const payload = {
+            id: user._id.toString(),
+            user_id: user.user_id,
+            name: user.name,
+            profile_pic_filename: user.profile_pic_filename
+        };
+        
+        const newToken = jwt.sign(
+            payload,
+            process.env.JWT_SECRET,
+            { expiresIn: '1h' }
+        );
+        
+        const userResponse = {
+            _id: user._id.toString(),
+            user_id: user.user_id,
+            name: user.name,
+            email: user.email,
+            country: user.country,
+            created_at: user.created_at,
+            last_login: user.last_login,
+            profile_pic_id: user.profile_pic_filename
+        };
+        
+        console.log(`Token refreshed for User ID: ${user.user_id}`);
+        
+        res.status(200).json({
+            message: 'Token refreshed successfully',
+            user: userResponse,
+            token: newToken
+        });
+        
+    } catch (err) {
+        console.error('Token refresh error:', err);
+        res.status(500).json({ message: 'Server error during token refresh' });
+    }
+});
+
 export default router;

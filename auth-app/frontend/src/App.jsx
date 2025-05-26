@@ -4,6 +4,9 @@ import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
 import ChatPage from './pages/ChatPage';
+import SessionTimeoutAlert from './components/SessionTimeoutAlert';
+import ErrorBoundary from './components/ErrorBoundary';
+import LoadingIndicator from './components/LoadingIndicator';
 import authApi from './services/authApi';
 import './App.css';
 
@@ -70,69 +73,83 @@ function App() {
     };
 
     return (
-        <Router>
-            <nav className="app-nav">
-                <div className="nav-links">
-                    <Link to="/">Home</Link>
-                    {currentUser && <Link to="/chat">Chat</Link>}
-                    {!currentUser && (
-                        <>
-                            <Link to="/login">Login</Link>
-                            <Link to="/signup">Sign Up</Link>
-                        </>
-                    )}
-                </div>
-
-                {currentUser && (
-                    <div className="nav-user-section">
-                        <span className="nav-user-name">Welcome, {currentUser.name}!</span>
-                        <button onClick={handleLogout} className="nav-logout-btn">Logout</button>
+        <ErrorBoundary>
+            <LoadingIndicator />
+            <Router>
+                <nav className="app-nav">
+                    <div className="nav-links">
+                        <Link to="/">Home</Link>
+                        {currentUser && <Link to="/chat">Chat</Link>}
+                        {!currentUser && (
+                            <>
+                                <Link to="/login">Login</Link>
+                                <Link to="/signup">Sign Up</Link>
+                            </>
+                        )}
                     </div>
-                )}
-            </nav>
 
-            <main className="app-content">
-                <Routes>
-                    <Route
-                        path="/"
-                        element={
-                            <ProtectedRoute>
-                                <HomePage onLogout={handleLogout} />
-                            </ProtectedRoute>
-                        }
-                    />
+                    {currentUser && (
+                        <div className="nav-user-section">
+                            <span className="nav-user-name">Welcome, {currentUser.name}!</span>
+                            <button onClick={handleLogout} className="nav-logout-btn">Logout</button>
+                        </div>
+                    )}
+                </nav>
 
-                    <Route
-                        path="/chat"
-                        element={
-                            <ProtectedRoute>
-                                <ChatPage />
-                            </ProtectedRoute>
-                        }
-                    />
+                <main className="app-content">
+                    <Routes>
+                        <Route
+                            path="/"
+                            element={
+                                <ProtectedRoute>
+                                    <ErrorBoundary>
+                                        <HomePage onLogout={handleLogout} />
+                                    </ErrorBoundary>
+                                </ProtectedRoute>
+                            }
+                        />
 
-                    <Route
-                        path="/login"
-                        element={
-                            <PublicRoute>
-                                <LoginPage onLoginSuccess={handleLoginSuccess} />
-                            </PublicRoute>
-                        }
-                    />
+                        <Route
+                            path="/chat"
+                            element={
+                                <ProtectedRoute>
+                                    <ErrorBoundary>
+                                        <ChatPage />
+                                    </ErrorBoundary>
+                                </ProtectedRoute>
+                            }
+                        />
 
-                    <Route
-                        path="/signup"
-                        element={
-                            <PublicRoute>
-                                <SignupPage />
-                            </PublicRoute>
-                        }
-                    />
+                        <Route
+                            path="/login"
+                            element={
+                                <PublicRoute>
+                                    <ErrorBoundary>
+                                        <LoginPage onLoginSuccess={handleLoginSuccess} />
+                                    </ErrorBoundary>
+                                </PublicRoute>
+                            }
+                        />
 
-                    <Route path="*" element={<Navigate to={currentUser ? "/" : "/login"} replace />} />
-                </Routes>
-            </main>
-        </Router>
+                        <Route
+                            path="/signup"
+                            element={
+                                <PublicRoute>
+                                    <ErrorBoundary>
+                                        <SignupPage />
+                                    </ErrorBoundary>
+                                </PublicRoute>
+                            }
+                        />
+
+                        <Route path="*" element={<Navigate to={currentUser ? "/" : "/login"} replace />} />
+                    </Routes>
+                </main>
+                
+                {/* Show session timeout alert only for authenticated users */}
+                {currentUser && <SessionTimeoutAlert onLogout={handleLogout} />}
+            </Router>
+        </ErrorBoundary>
     );
 }
 
