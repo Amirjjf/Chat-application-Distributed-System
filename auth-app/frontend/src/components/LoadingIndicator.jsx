@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import './LoadingIndicator.css';
 
 const LoadingIndicator = () => {
   const [loading, setLoading] = useState(false);
@@ -38,11 +39,14 @@ const LoadingIndicator = () => {
 
   if (!loading) {
     return null;
-  }
-
-  return (
+  }  return (
     <div className="global-loading-indicator">
-      <div className="loading-spinner"></div>
+      <div className="wave-background">
+        <div className="wave"></div>
+      </div>
+      <div className="loading-spinner" role="status">
+        <span className="sr-only" style={{ display: 'none' }}>Loading...</span>
+      </div>
     </div>
   );
 };

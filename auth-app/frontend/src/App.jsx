@@ -94,9 +94,7 @@ function App() {
                             <button onClick={handleLogout} className="nav-logout-btn">Logout</button>
                         </div>
                     )}
-                </nav>
-
-                <main className="app-content">
+                </nav>                <main className="app-content">
                     <Routes>
                         <Route
                             path="/"
